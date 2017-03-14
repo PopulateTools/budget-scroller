@@ -136,10 +136,12 @@ window.createGraphic = function(graphicSelector, budget) {
 			.domain(DENIA.length)
 			.range([0, 200])
 			
-		var xAxis = d3.axisBottom()
+		var xAxis = d3.axisBottom(scaleX)
 			.ticks(5)
-			.tickSize(-height)
-			.scale(scaleX);
+			.tickFormat(function(d) {
+				return d + '%';
+			})
+			.tickSize(-height);
 	
 		chart.append('g')
     	.attr('class', 'x axis')
