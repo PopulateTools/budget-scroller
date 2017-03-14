@@ -33,7 +33,7 @@ ggplot(multas, aes(amount_per_inhabitant, log10(population))) +
 
 # Spain
 df_ag <- df %>%
-  group_by(budget_line_1_name) %>%
+  group_by(budget_line_2_name) %>%
   summarise(
     total_amount = sum(amount)
   ) %>%
@@ -42,7 +42,7 @@ df_ag <- df %>%
     pct_budget = round(total_amount / total_budget * 100, 1)
   )
 
-df_ag$budget_line_1_name <- factor(df_ag$budget_line_1_name)
+df_ag$budget_line_2_name <- factor(df_ag$budget_line_2_name)
 df_ag$place_name <- 'Spain'
 
 ggplot(df_ag, aes(place_name, total_amount, fill=budget_line_1_name)) +
@@ -53,7 +53,7 @@ ggplot(df_ag, aes(place_name, total_amount, fill=budget_line_1_name)) +
 vlc <- filter(df, autonomous_region_id == 10)
 
 vlc_ag <- vlc %>%
-  group_by(budget_line_1_name) %>%
+  group_by(budget_line_2_name) %>%
   summarise(
     total_amount = sum(amount)
   ) %>%
@@ -62,7 +62,7 @@ vlc_ag <- vlc %>%
     pct_budget = round(total_amount / total_budget * 100, 1)
   )
 
-vlc_ag$budget_line_1_name <- factor(vlc_ag$budget_line_1_name)
+vlc_ag$budget_line_2_name <- factor(vlc_ag$budget_line_2_name)
 vlc_ag$place_name <- 'Comunitat Valenciana'
 
 ggplot(cat_ag, aes(place_name, total_amount, fill=budget_line_2_name)) +
@@ -73,7 +73,7 @@ ggplot(cat_ag, aes(place_name, total_amount, fill=budget_line_2_name)) +
 denia <- filter(df, ine_code == '3063')
 
 denia_ag <- denia %>%
-  group_by(budget_line_1_name) %>%
+  group_by(budget_line_2_name) %>%
   summarise(
     total_amount = sum(amount)
   ) %>%
@@ -82,7 +82,7 @@ denia_ag <- denia %>%
     pct_budget = round(total_amount / total_budget * 100, 1)
   )
 
-denia_ag$budget_line_1_name <- factor(denia_ag$budget_line_1_name)
+denia_ag$budget_line_2_name <- factor(denia_ag$budget_line_2_name)
 denia_ag$place_name <- 'Dénia'
 
 ggplot(city_ag, aes(place_name, pct_budget, fill=budget_line_2_name)) +

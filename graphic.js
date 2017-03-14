@@ -19,7 +19,7 @@ window.createGraphic = function(graphicSelector, budget) {
 	
 	var margin = {top: 20, right: 30, bottom: 20, left: 10};
 	    width = graphicVisEl.node().clientWidth - margin.left - margin.right,
-	    height = 320 - margin.top - margin.bottom;
+	    height = 960 - margin.top - margin.bottom;
 
 	// actions to take on each step of our scroll-driven story
 	var steps = [
@@ -30,15 +30,16 @@ window.createGraphic = function(graphicSelector, budget) {
 			var item = graphicVisEl.selectAll('.item')
 				.data(SPAIN)
 				.transition(t)
+				.style('opacity', 1)
 				.attr('fill', function(d) {
 					return color(d.place_name);
 				})
 				.attr('transform', function(d, i) {
-					return translate(scaleX(d.pct_budget), 30 * i)
+					return translate(scaleX(d.pct_budget), 20 * i)
 				});
 				
 			item.select('text')
-				.text(function(d) { return d.budget_line_1_name });
+				.text(function(d) { return d.budget_line_2_name });
 		},
 
 		function step1() {
@@ -48,17 +49,21 @@ window.createGraphic = function(graphicSelector, budget) {
 			var item = graphicVisEl.selectAll('.item')
 				.data(VLC);
 				
+			item.exit()
+				.transition(t)
+				.style('opacity', 0)
+				
 			item.transition(t)
 				.style('opacity', 1)
 				.attr('fill', function(d) {
 					return color(d.place_name);
 				})
 				.attr('transform', function(d, i) {
-					return translate(scaleX(d.pct_budget), 30 * i)
+					return translate(scaleX(d.pct_budget), 20 * i)
 				});
 
 			item.select('text')
-				.text(function(d) { return d.budget_line_1_name });
+				.text(function(d) { return d.budget_line_2_name });
 		},
 		function step2() {
 			var t = d3.transition()
@@ -76,11 +81,11 @@ window.createGraphic = function(graphicSelector, budget) {
 					return color(d.place_name);
 				})
 				.attr('transform', function(d, i) {
-					return translate(scaleX(d.pct_budget), 30 * i)
+					return translate(scaleX(d.pct_budget), 20 * i)
 				});
 			
 			item.select('text')
-				.text(function(d) { return d.budget_line_1_name });
+				.text(function(d) { return d.budget_line_2_name });
 		},
 	]
 
@@ -149,14 +154,14 @@ window.createGraphic = function(graphicSelector, budget) {
 				return color(d.place_name);
 			})
 			.attr('transform', function(d, i) {
-				return translate(scaleX(d.pct_budget), 30 * i)
+				return translate(scaleX(d.pct_budget), 20 * i)
 			});
 		
 		item.append('circle')
-			.attr('r', 10);
+			.attr('r', 5);
 
 		item.append('text')
-			.text(function(d) { return d.budget_line_1_name })
+			.text(function(d) { return d.budget_line_2_name })
 			.attr('y', 1)
 			.attr('dx', 15);
 	}
