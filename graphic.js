@@ -49,6 +49,7 @@ window.createGraphic = function(graphicSelector, budget) {
 				.data(VLC);
 				
 			item.transition(t)
+				.style('opacity', 1)
 				.attr('fill', function(d) {
 					return color(d.place_name);
 				})
@@ -67,10 +68,9 @@ window.createGraphic = function(graphicSelector, budget) {
 				.data(DENIA)
 			
 			item.exit()
-				.attr('transform', function(d) {
-					return translate(-999, -999);
-				});
-			
+				.transition(t)
+				.style('opacity', 0)
+
 			item.transition(t)
 				.attr('fill', function(d) {
 					return color(d.place_name);
