@@ -1,0 +1,80 @@
+/* GRAPHIC CODE */
+body {
+  font-family: "Helvetica Neue";
+  margin: 0;
+}
+.graphic {
+  max-width: 960px;
+  margin: 0 auto;
+	position: relative;
+}
+.text {
+	width: 45%;
+}
+.text .trigger {
+	padding: 0;
+	margin: 0;
+	min-height: 240px;
+}
+.vis {
+	position: absolute;
+	top: 0;
+	margin-left: 30rem;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	height: 100vh;
+  width: 50%;
+}
+.trigger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vis.is-fixed {
+	position: fixed;
+}
+.vis.is-bottom {
+	top: auto;
+	bottom: 0;
+}
+.vis svg {
+	top: 50%;
+	position: relative;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+path.domain {
+  display: none;
+}
+.item circle {
+	stroke: none;
+}
+.item text {
+	fill: #666;
+	font-size: 12px;
+	text-anchor: start;
+	alignment-baseline: middle;
+}
+.tick line {
+  stroke: rgb(220,220,220);
+}
+
+/* graph-scroll.js version */
+.trigger {
+  transition: 1.5s;
+  opacity: 0.4;
+}
+.trigger.graph-scroll-active {
+  opacity: 1;
+}
+.vis.graph-scroll-fixed {
+	position: fixed;
+	right: auto;
+}
+
+.vis.graph-scroll-below {
+	top: auto;
+	bottom: 0;
+}

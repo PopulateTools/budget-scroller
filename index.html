@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Comparación ingresos ayuntamientos</title>
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<div class='graphic'>
+  <div class='text'>
+    <div class="trigger" data-step='0'>
+      <div class="">
+        <h1>España</h1>
+        <p>Step 1 in the graphic. It triggers in the middle of the viewport. For this graphic, it is the same as the initial state so the reader doesn&rsquo;t miss anything.</p>
+      </div>
+    </div>
+    <div class="trigger" data-step='1'>
+      <div class="">
+        <h1>Comunitat Valenciana</h1>
+        <p>Step 2 arrives. The graphic should be locking into a fixed position right about now. We could have a whole bunch of these &ldquo;fixed&rdquo; steps.</p>
+      </div>
+    </div>
+    <div class="trigger" data-step='2'>
+      <div class="">
+        <h1>Dénia</h1>
+        <p>Step 3 concludes our brief tour. The graphic should now go back to its original in-flow position, elegantly snapping back into place.</p>
+      </div>
+    </div>
+  </div>
+  <div class='vis'></div>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="https://unpkg.com/graph-scroll@0.0.7" charset="utf-8"></script>
+<script src="https://unpkg.com/lodash@4.17.4"></script>
+<script src="graphic.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+(function() {
+
+  function graphscroll() {
+    // select elements using d3 here since this is a d3 library...
+    var graphicEl = d3.select('.graphic')
+    var graphicVisEl = graphicEl.select('.vis')
+    var triggerEls = graphicEl.selectAll('.trigger')
+
+    // viewport height
+    var viewportHeight = window.innerHeight
+    var halfViewportHeight = viewportHeight / 2
+    
+    d3.csv('/data/out.csv', function(error, data) {
+      // a global function creates and handles all the vis + updates
+      var graphic = createGraphic('.graphic', data)
+
+      // this is it, graph-scroll handles pretty much everything
+      // it will automatically add class names to the elements,
+      // so you just need to handle the fixed positions with css
+      d3.graphScroll()
+        .container(graphicEl)
+        .graph(graphicVisEl)
+        .sections(triggerEls)
+        .offset(halfViewportHeight)
+        .on('active', function(i) {
+          graphic.update(i)
+        })
+    });
+  }
+
+  graphscroll();
+
+})()
+</script>
+</body>
+</html>
